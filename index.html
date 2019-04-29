@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>ISP Supplementary Exam</title>
+
+    <script>
+        $(document).ready(function() {
+        });
+
+        //Create variables
+        var Food  = [];
+        var Entree   = [];
+        var Dessert = [];
+        var E_Calories = [];
+        var D_Calories = [];
+        var Protien = [];
+        var GlutenFree = Boolean;
+        var DairyFree = Boolean;
+        var Totals = [];
+        var Count;
+
+        //references
+        var entreeInput  = document.getElementById("entree");
+        var dessertInput  = document.getElementById("dessert");
+        var E_CaloriesInput  = document.getElementById("E_calories");
+        var D_CaloriesInput  = document.getElementById("D_calories");
+        var protienInput = document.getElementById("protien");
+        var GFInput  = document.getElementById("glutenfree");
+        var DFInput  = document.getElementById("dairyfree");
+        var messageBox  = document.getElementById("display");
+
+        //add data fxns
+        function insertentree ( ) {
+            entrees.push( entreeInput.value );
+            ecalories.push( E_CaloriesInput.value );
+            protien.push( protienInput.value );
+
+            Count++;
+            clearAndShow();
+        }
+
+        function insertdessert( ){
+            desserts.push( dessertInput.value );
+            dcalories.push( D_CaloriesInput.value );
+            gluten.push( "gluten" +GFInput.value );
+            dairy.push ( "dairy" + DFInput.value );
+
+            Count++;
+            clearAndShow();
+        }
+
+
+        function calorieCount(){
+            messageBox.innerHTML += "Total Calories: " + (E_Calories + D_Calories)+ "<br/>";
+            messageBox.innerHTML += "Average Calories: " + (E_Calories + D_Calories)/Count  + "<br/>";
+
+        }
+        //show data
+        function clearAndShow () {
+            entreeInput.value = "";
+            dessertInput.value = "";
+            E_CaloriesInput.value = "";
+            D_CaloriesInput.value = "";
+
+            messageBox.innerHTML = "";
+
+            messageBox.innerHTML += "Entrees: " + entrees.join(", ");
+            messageBox.innerHTML += "Entree Calories: " + e_calories.join(", ") +"<br>";
+            messageBox.innerHTML += "Desserts: " + desserts.join(", ");
+            messageBox.innerHTML += "Dessert Calories: " + d_calories.join(", ") + "<br/>";
+        }
+
+        //JavaScript three tab logic
+        function showToggle() {
+            var x = document.getElementById("showDiv1");
+            var y = document.getElementById("showDiv2");
+            var z = document.getElementById("showDiv3");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                y.style.display ="none";
+                z.style.display = "none";
+            } else {
+                //x.style.display = "none";
+                y.style.display ="none";
+                z.style.display = "none";
+            }
+        }
+        function showToggle2() {
+            var x = document.getElementById("showDiv2");
+            var y = document.getElementById("showDiv1");
+            var z = document.getElementById("showDiv3");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                y.style.display ="none";
+                z.style.display = "none";
+            } else {
+                //x.style.display = "none";
+                y.style.display ="none";
+                z.style.display = "none";
+            }
+
+        }
+        function showToggle3() {
+            var x = document.getElementById("showDiv3");
+            var y = document.getElementById("showDiv1");
+            var z = document.getElementById("showDiv2");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                y.style.display ="none";
+                z.style.display = "none";
+            } else {
+                //x.style.display = "none";
+                y.style.display ="none";
+                z.style.display = "none";
+            }
+        }
+
+    </script>
+</head>
+<body>
+
+    <div style="text-align: center;"><h2>Food Application</h2></div><br>
+    <!-- Satisfies three tabs -->
+    <div>
+        <div style="text-align: center;">
+            <button type="button" class="btn btn-primary btn-lg" onclick="showToggle()">Add Item</button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="showToggle2()">List Items</button>
+            <button type="button" class="btn btn-primary btn-lg" onclick="showToggle3()">Summary</button>
+        </div> <br><br>
+
+
+        <div class="container" id="showDiv1">
+            <div class="row">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Select Which Item You Wish To Create:</div>
+                    <div class="panel-body"><form>
+                        <h1>Please enter data</h1>
+                        <div style="text-align: center;"><h2>Entree</h2><p></p></div>
+                        <input id="entree" type="text" placeholder="entree" />
+                        <input id="E_calories" type="integer" placeholder="calories" />
+                        <input id="protien" type="text" placeholder="protien" />
+                        <input type="button" value="Save" onclick="insertentree()" />
+                        <input type="button" value="Show data" onclick="show()" />
+                        <div style="text-align: center;"><h2>Dessert</h2><p></p></div>
+                        <input id="dessert" type="text" placeholder="dessert" />
+                        <input id="D_calories" type="text" placeholder="calories" />
+                        <input id="glutenfree" type="checkbox" placeholder="Gluten Free" />
+                        <label for="glutenfree">Gluten Free?</label>
+                        <input id="dairyfree" type="checkbox"  placeholder="Dairy Free" />
+                        <label for="dairyfree">Dairy Free?</label>
+                        <input type="button" value="Save" onclick="insertdessert()" />
+                        <input type="button" value="Show data" onclick="show()" />
+                    </form>
+                        <div id="display"></div></div>
+
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="container" style="display:none" id="showDiv2">
+            <div class="row">
+                <div class="col-sm-4">
+
+                </div>
+            </div>
+        </div>
+        <div class="container" style="display:none" id="showDiv3">
+            <div class="row">
+                <div class="col-sm-4">
+
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <br>
+
+        <footer class="container-fluid text-center">
+            <p>Food Application ©2019<br>
+                Contact Us: 555-555-5555 or email us at yourcustomfoodapp@wctc.edu</p>
+        </footer>
+
+</body>
+</html>
